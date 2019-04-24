@@ -18,6 +18,7 @@ const Header = styled.View`
 
 const H1 = styled.Text`
   color: #fff;
+  font-family: relay;
   font-size: 24px;
   font-weight: bold;
   text-align: center;
@@ -27,6 +28,7 @@ const H1 = styled.Text`
 const H2 = styled.Text`
   color: #fff;
   font-size: 14px;
+  font-family: relay;
   font-weight: 100;
   text-align: center;
   line-height: 23px;
@@ -35,6 +37,7 @@ const H2 = styled.Text`
 const H3 = styled.Text`
   color: #fff;
   font-size: 12px;
+  font-family: relay;
   font-weight: bold;
   text-align: center;
   line-height: 23px;

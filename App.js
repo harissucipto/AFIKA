@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import HomeScreen from './screens/HomeScreen';
 import { AppLoading, Font } from 'expo';
-import { TabNavigator, StackNavigator } from 'react-navigation';
+import { createStackNavigator, createAppContainer } from 'react-navigation';
 import { Provider } from 'react-redux';
 
 export default class App extends React.Component {
@@ -39,12 +39,15 @@ export default class App extends React.Component {
 
   render() {
     const { theme, currentTheme, isReady } = this.state;
+    const MainNavigator = createStackNavigator({
+      home: HomeScreen
+    });
 
     if (!isReady) {
       return <AppLoading />;
     }
 
-    return <HomeScreen />;
+    return createAppContainer(<MainNavigator />);
   }
 }
 

@@ -1,12 +1,28 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, TextInput, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  TextInput,
+  Image,
+  FlatList
+} from 'react-native';
 import { IconFill, IconOutline } from '@ant-design/icons-react-native';
-import { SearchBar, WhiteSpace } from 'antd-mobile-rn';
+import { List, Card, WingBlank } from 'antd-mobile-rn';
 
-import { Background, Header2, H3, H2, H5 } from '../components/Themes';
+import {
+  Background,
+  Header2,
+  H3,
+  H2,
+  H5,
+  Body,
+  Content
+} from '../components/Themes';
 import { white } from 'ansi-colors';
 
 import back from '../assets/back.png';
+const Item = List.Item;
 
 export default class AddHapalanScreen extends Component {
   render() {
@@ -36,6 +52,18 @@ export default class AddHapalanScreen extends Component {
             />
           </View>
         </Header2>
+        <Body>
+          <Content>
+            <FlatList
+              data={[{ key: 'a' }, { key: 'b' }]}
+              renderItem={({ item }) => (
+                <WingBlank>
+                  <Text>{item.key}</Text>
+                </WingBlank>
+              )}
+            />
+          </Content>
+        </Body>
       </Background>
     );
   }

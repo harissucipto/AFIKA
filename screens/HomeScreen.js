@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity, Image } from 'react-native';
+import {
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  ImageBackground
+} from 'react-native';
 import styled from 'styled-components/native';
 import { IconFill, IconOutline } from '@ant-design/icons-react-native';
 
@@ -14,6 +20,7 @@ import {
 } from '../components/Themes';
 import menu from '../assets/menu.png';
 import add from '../assets/add.png';
+import home from '../assets/bg-home.png';
 
 export default class HomeScreen extends Component {
   state = {

@@ -25,6 +25,7 @@ export const Header2 = styled.View`
   padding-top: 55px;
   padding-left: 17px;
   flex-direction: row;
+  margin-bottom: 20px;
   background-color: ${secondary};
 `;
 

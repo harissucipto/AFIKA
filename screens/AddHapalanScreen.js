@@ -19,13 +19,20 @@ import {
   Body,
   Content
 } from '../components/Themes';
-import { white } from 'ansi-colors';
-
 import back from '../assets/back.png';
-const Item = List.Item;
+
+import alQuran from '../assets/al-quran';
 
 export default class AddHapalanScreen extends Component {
+  state = {
+    alQuran
+  };
+
   render() {
+    const { alQuran } = this.state;
+
+    console.log(alQuran[0].name);
+
     return (
       <Background>
         <Header2>
@@ -55,10 +62,14 @@ export default class AddHapalanScreen extends Component {
         <Body>
           <Content>
             <FlatList
-              data={[{ key: 'a' }, { key: 'b' }]}
+              keyExtractor={item => item.number}
+              data={alQuran}
               renderItem={({ item }) => (
                 <WingBlank>
-                  <Text>{item.key}</Text>
+                  <View>
+                    <Text>{item.name_latin}</Text>
+                    <Text>{item.number}</Text>
+                  </View>
                 </WingBlank>
               )}
             />

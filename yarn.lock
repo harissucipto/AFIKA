@@ -4560,6 +4560,10 @@ repeating@^2.0.0:
   dependencies:
     is-finite "^1.0.0"
 
+require-all@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/require-all/-/require-all-3.0.0.tgz#473d49704be310115ce124f77383b1ebd8671312"
+
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"

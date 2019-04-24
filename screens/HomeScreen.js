@@ -57,12 +57,18 @@ const BottomContainer = styled.View`
 `;
 
 export default class HomeScreen extends Component {
+  state = {
+    hapalan: []
+  };
+
   render() {
+    const { hapalan } = this.state;
+
     return (
       <Background>
         <Header>
           <TouchableOpacity>
-            <IconFill name="home" size={20} color="white" />
+            <IconFill name="switcher" size={20} color="white" />
           </TouchableOpacity>
 
           <View style={{ flex: 1 }}>
@@ -73,12 +79,19 @@ export default class HomeScreen extends Component {
         </Header>
 
         <Body>
-          <Content>
-            <H3>Test</H3>
-          </Content>
+          {hapalan.length ? (
+            <Content>
+              <H3>Test</H3>
+            </Content>
+          ) : (
+            <View style={{ flex: 1, justifyContent: 'center' }}>
+              <H2>Belum ada hapalan...</H2>
+            </View>
+          )}
+
           <BottomContainer>
             <TouchableOpacity>
-              <IconFill name="plus-circle" size={58} color="red" />
+              <IconFill name="plus-circle" size={58} color="#5B3E96" />
             </TouchableOpacity>
           </BottomContainer>
         </Body>

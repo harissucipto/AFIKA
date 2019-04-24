@@ -1,63 +1,19 @@
 import React, { Component } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
+import { Text, View, TouchableOpacity, Image } from 'react-native';
 import styled from 'styled-components/native';
 import { IconFill, IconOutline } from '@ant-design/icons-react-native';
 
-const Background = styled.View`
-  background-color: 'rgba(20, 10, 38, 1)';
-  flex: 1;
-`;
-
-const Header = styled.View`
-  height: 140px;
-  padding-top: 55px;
-  padding-left: 17px;
-  flex-direction: row;
-  background-color: rgba(34, 23, 56, 1);
-`;
-
-const H1 = styled.Text`
-  color: #fff;
-  font-family: relay;
-  font-size: 24px;
-  font-weight: bold;
-  text-align: center;
-  line-height: 23px;
-`;
-
-const H2 = styled.Text`
-  color: #fff;
-  font-size: 14px;
-  font-family: relay;
-  font-weight: 100;
-  text-align: center;
-  line-height: 23px;
-`;
-
-const H3 = styled.Text`
-  color: #fff;
-  font-size: 12px;
-  font-family: relay;
-  font-weight: bold;
-  text-align: center;
-  line-height: 23px;
-`;
-
-const Content = styled.ScrollView`
-  flex: 1;
-  height: 100%;
-`;
-
-const Body = styled.View`
-  flex: 1;
-  position: relative;
-`;
-
-const BottomContainer = styled.View`
-  position: absolute;
-  bottom: 25;
-  right: 10;
-`;
+import {
+  Background,
+  Header,
+  Body,
+  ButtonBottom,
+  H1,
+  H3,
+  H4
+} from '../components/Themes';
+import menu from '../assets/menu.png';
+import add from '../assets/add.png';
 
 export default class HomeScreen extends Component {
   state = {
@@ -71,32 +27,34 @@ export default class HomeScreen extends Component {
       <Background>
         <Header>
           <TouchableOpacity>
-            <IconFill name="switcher" size={20} color="white" />
+            <Image source={menu} />
           </TouchableOpacity>
 
           <View style={{ flex: 1 }}>
             <H1>AFIKA</H1>
-            <H2>Aplikasi Penghapal Al-Quran</H2>
-            <H3>0 / 114 Surah ditambahkan</H3>
+            <H3>Aplikasi Penghapal Al-Quran</H3>
+            <H4>0 / 114 Surah ditambahkan</H4>
           </View>
         </Header>
 
         <Body>
           {hapalan.length ? (
             <Content>
-              <H3>Test</H3>
+              <H4>Test</H4>
             </Content>
           ) : (
             <View style={{ flex: 1, justifyContent: 'center' }}>
-              <H2>Belum ada hapalan...</H2>
+              <H3>Belum ada hapalan...</H3>
             </View>
           )}
 
-          <BottomContainer>
-            <TouchableOpacity>
-              <IconFill name="plus-circle" size={58} color="#5B3E96" />
+          <ButtonBottom>
+            <TouchableOpacity
+              onPress={() => this.props.navigation.navigate('AddHapalan')}
+            >
+              <Image source={add} />
             </TouchableOpacity>
-          </BottomContainer>
+          </ButtonBottom>
         </Body>
       </Background>
     );

@@ -8,7 +8,8 @@ import {
   FlatList
 } from 'react-native';
 import { IconFill, IconOutline } from '@ant-design/icons-react-native';
-import { List, Card, WingBlank } from 'antd-mobile-rn';
+import { List, WingBlank, Flex, WhiteSpace, Modal } from 'antd-mobile-rn';
+import styled from 'styled-components/native';
 
 import {
   Background,
@@ -23,15 +24,45 @@ import back from '../assets/back.png';
 
 import alQuran from '../assets/al-quran';
 
+const Card = styled.View`
+  flex: 1;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #fff;
+  margin-bottom: 20px;
+  padding: 20px;
+`;
+
+const P1 = styled.Text`
+  font-family: relay;
+  font-size: 14;
+  font-weight: bold;
+`;
+
 export default class AddHapalanScreen extends Component {
   state = {
-    alQuran
+    alQuran,
+    cari: '',
+    hapalan: []
+  };
+
+  pencarian = () => {
+    const { cari, alQuran } = this.state;
+
+    if (!cari.trim().length) return alQuran;
+    return alQuran.filter(item => {
+      return (
+        item.name_latin.toLowerCase().includes(cari) ||
+        item.number.includes(cari)
+      );
+    });
+
+    return filter;
   };
 
   render() {
-    const { alQuran } = this.state;
-
-    console.log(alQuran[0].name);
+    const { alQuran, cari } = this.state;
+    const filterAlQuran = this.pencarian();
 
     return (
       <Background>
@@ -42,9 +73,9 @@ export default class AddHapalanScreen extends Component {
 
           <View style={{ flex: 1 }}>
             <H2>Tambah Hapalan</H2>
-
             <H5>0 / 114 surah ditambahkan</H5>
             <TextInput
+              onChangeText={cari => this.setState({ cari })}
               placeholder="Cari Nama Surah"
               style={{
                 color: 'white',
@@ -62,15 +93,44 @@ export default class AddHapalanScreen extends Component {
         <Body>
           <Content>
             <FlatList
+              refreshing={true}
               keyExtractor={item => item.number}
-              data={alQuran}
+              data={filterAlQuran}
               renderItem={({ item }) => (
-                <WingBlank>
-                  <View>
-                    <Text>{item.name_latin}</Text>
-                    <Text>{item.number}</Text>
-                  </View>
-                </WingBlank>
+                <TouchableOpacity
+                  onPress={() => (
+                    <WingBlank>
+                      {Modal.alert('Tambahkan Hapalan', item.name_latin, [
+                        {
+                          text: 'Cancel',
+                          onPress: () => console.log('cancel'),
+                          style: 'cancel'
+                        },
+                        {
+                          text: 'OK',
+                          onPress: () => {
+                            const newData = alQuran.filter(
+                              data => data.number !== item.number
+                            );
+                            this.setState({ alQuran: newData });
+                          }
+                        }
+                      ])}
+                    </WingBlank>
+                  )}
+                >
+                  <WingBlank>
+                    <Card>
+                      <Flex>
+                        <P1>+</P1>
+                        <P1>{'  '}</P1>
+                        <P1>{item.name_latin}</P1>
+                      </Flex>
+
+                      <Text>No. {item.number}</Text>
+                    </Card>
+                  </WingBlank>
+                </TouchableOpacity>
               )}
             />
           </Content>

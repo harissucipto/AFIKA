@@ -13,6 +13,7 @@
     "@ant-design/react-native": "^3.1.6",
     "antd-mobile-rn": "^2.3.3",
     "expo": "^31.0.2",
+    "lodash": "^4.17.11",
     "moment": "^2.24.0",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-31.0.0.tar.gz",
@@ -23,7 +24,8 @@
     "redux-thunk": "^2.3.0",
     "require-all": "^3.0.0",
     "styled-components": "^4.2.0",
-    "supermemo2": "^1.0.2"
+    "supermemo2": "^1.0.2",
+    "unstated": "^2.1.1"
   },
   "devDependencies": {
     "babel-plugin-import": "^1.11.0",

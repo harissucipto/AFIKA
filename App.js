@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { AppLoading, Font } from 'expo';
-import { Provider } from 'react-redux';
+import { Provider } from 'unstated';
 
-import store from './store';
 import Navigation from './screens/Navigation';
 
 export default class App extends React.Component {
@@ -46,7 +45,7 @@ export default class App extends React.Component {
     }
 
     return (
-      <Provider store={store}>
+      <Provider>
         <Navigation />
       </Provider>
     );

@@ -10,3 +10,9 @@ export const surahBelumDihapal = (surah, hapalanSurahs) =>
 
 export const filterSurahBelumDihapal = hapalanSurahs => surah =>
   surahBelumDihapal(surah, hapalanSurahs);
+
+export const filterNamaSurah = query => surah =>
+  surah.name_latin.toLowerCase().includes(query.toLowerCase());
+
+export const cariSurah = (surahs, query) =>
+  query.length ? surahs.filter(filterNamaSurah(query)) : surahs;

@@ -5,10 +5,12 @@ import { Subscribe } from 'unstated';
 import DataHapalan from '../unstated/DataHapalan';
 import AddHapalan from '../components/AddHapalan';
 
-const AddHapalanScreen = () => {
+const AddHapalanScreen = ({ navigation }) => {
   return (
     <Subscribe to={[DataHapalan]}>
-      {dataHapalan => <AddHapalan dataHapalan={dataHapalan} />}
+      {dataHapalan => (
+        <AddHapalan dataHapalan={dataHapalan} navigation={navigation} />
+      )}
     </Subscribe>
   );
 };

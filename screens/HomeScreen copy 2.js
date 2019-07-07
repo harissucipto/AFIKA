@@ -5,14 +5,12 @@ import { Subscribe } from 'unstated';
 import DataHapalan from '../unstated/DataHapalan';
 import Home from '../components/Home';
 
-const HomeScreen = ({ navigation }) => {
+const AddHapalanScreen = () => {
   return (
     <Subscribe to={[DataHapalan]}>
-      {dataHapalan => (
-        <Home dataHapalan={dataHapalan} navigation={navigation} />
-      )}
+      {dataHapalan => <Home dataHapalan={dataHapalan} />}
     </Subscribe>
   );
 };
 
-export default HomeScreen;
+export default AddHapalanScreen;

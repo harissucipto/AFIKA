@@ -5,7 +5,8 @@ import {
   Flex,
   PickerView,
   Checkbox,
-  TextareaItem
+  TextareaItem,
+  WhiteSpace
 } from 'antd-mobile-rn';
 
 const initDisplayHapalanAyat = {
@@ -175,8 +176,23 @@ class CardEdit extends Component {
                 <Picker.Item label={label} value={value} key={label} />
               ))}
             </Picker>
+
+            <Button
+              title="prev"
+              disabled={this.state.selectAyat <= 1}
+              style={{ marginRight: 4 }}
+              onPress={() => this.changeAyat(this.state.selectAyat - 1, 0)}
+            />
+            <Button
+              title="next"
+              disabled={this.state.selectAyat >= this.state.listAyat.length}
+              style={{ marginRight: 4 }}
+              onPress={() => this.changeAyat(this.state.selectAyat + 1, 0)}
+            />
           </Flex>
         </WingBlank>
+
+        <WhiteSpace />
 
         <WingBlank>
           <Text>Preview Ayat dan Terjemahan: </Text>

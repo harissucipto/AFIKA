@@ -3,9 +3,15 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'antd-mobile-rn';
 
 import CardEdit from './CardEdit';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Index = ({ dataHapalan, navigation }) => {
-  const { state, addHapalanSurahs, deleteHapalanSurah } = dataHapalan;
+  const {
+    state,
+    addHapalanSurahs,
+    deleteHapalanSurah,
+    editDisplayHapalanAyats
+  } = dataHapalan;
 
   const { editSurah } = state;
 
@@ -17,7 +23,7 @@ const Index = ({ dataHapalan, navigation }) => {
   } = navigation;
 
   return (
-    <View>
+    <ScrollView>
       <TouchableOpacity
         onPress={() => navigation.pop()}
         style={{ marginTop: 30, marginBottom: 30 }}
@@ -26,14 +32,18 @@ const Index = ({ dataHapalan, navigation }) => {
       </TouchableOpacity>
       <Text>Edit hapalan screen</Text>
 
-      <CardEdit surah={editSurah} />
+      <CardEdit
+        surah={editSurah}
+        navigation={navigation}
+        editDisplayHapalanAyats={editDisplayHapalanAyats}
+      />
 
       {/* <ListHapalan
         navigation={navigation}
         hapalanSurahs={hapalanSurahs}
         deleteHapalanSurah={deleteHapalanSurah}
       /> */}
-    </View>
+    </ScrollView>
   );
 };
 

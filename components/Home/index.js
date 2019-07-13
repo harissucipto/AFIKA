@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'antd-mobile-rn';
 
+import ListHapalan from './ListHapalan';
+
 const Index = ({ dataHapalan, navigation }) => {
   const { state, addHapalanSurahs, setQuery, clearQuery } = dataHapalan;
 
@@ -16,10 +18,7 @@ const Index = ({ dataHapalan, navigation }) => {
         <Text>Tambah</Text>
       </TouchableOpacity>
 
-      <Text style={{ marginTop: 30 }}>Daftar Hapalan</Text>
-      {hapalanSurahs.map(item => (
-        <Text key={item.number}>{item.number}</Text>
-      ))}
+      <ListHapalan hapalanSurahs={hapalanSurahs} />
     </View>
   );
 };

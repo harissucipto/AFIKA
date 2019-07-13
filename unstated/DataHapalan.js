@@ -3,21 +3,22 @@ import _ from 'lodash';
 
 import { surahs } from '../assets/surahs';
 
-const initalStateSurah = {
+const displayHapalanSurah = {
   dataFrontCard: {
     text: false,
     translations: true,
     numberAyat: true,
-    content: false
+    deskripsi: false
   },
   dataBackCard: {
     text: true,
     translations: false,
     numberAyat: false,
-    content: false
+    deskripsi: false
   },
-  contentFrontCard: '',
-  contentBackCard: ''
+  deskripsiFrontCard: '',
+  deskripsiBackCard: '',
+  number: 0
 };
 
 class DataHapalan extends Container {
@@ -30,7 +31,7 @@ class DataHapalan extends Container {
 
   addHapalanSurahs = surah =>
     this.setState(({ hapalanSurahs }) => ({
-      hapalanSurahs: [...hapalanSurahs, { ...initalStateSurah, ...surah }]
+      hapalanSurahs: [...hapalanSurahs, { ...surah, displayHapalanAyats: [] }]
     }));
 
   deleteHapalanSurah = number =>

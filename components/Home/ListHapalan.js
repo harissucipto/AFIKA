@@ -1,22 +1,99 @@
-import React from 'react';
-import { ScrollView, Text } from 'react-native';
-import { List } from 'antd-mobile-rn';
+import React, { Component } from 'react';
+import { ScrollView, Text, TouchableOpacity, View, Button } from 'react-native';
+import { List, WingBlank, Flex, Modal } from 'antd-mobile-rn';
 
 const { Item } = List;
 
-const ListSurah = ({ hapalanSurahs }) => {
-  return (
-    <ScrollView>
-      <List>
-        {hapalanSurahs.map(surah => (
-          <Item key={surah.number} extra={<Text>:</Text>} align="middle">
-            {surah.number}
-            {surah.name_latin} 0-0-0
-          </Item>
-        ))}
-      </List>
-    </ScrollView>
-  );
+const surahSelected = {
+  nameLatin: '',
+  number: ''
 };
+
+class ListSurah extends Component {
+  state = {
+    visible: false,
+    ...surahSelected
+  };
+
+  onClose = () => this.setState({ ...surahSelected, visible: false });
+  onSettingOpen = surah => () =>
+    this.setState({
+      visible: true,
+      nameLatin: surah.name_latin,
+      number: surah.number
+    });
+
+  render() {
+    const { hapalanSurahs } = this.props;
+    const footerButtons = [
+      { text: 'Cancel', onPress: () => console.log('cancel') },
+      { text: 'Ok', onPress: () => console.log('ok') }
+    ];
+
+    return (
+      <ScrollView>
+        <List>
+          {hapalanSurahs.map(surah => (
+            <Item key={surah.number}>
+              <WingBlank
+                style={{
+                  backgroundColor: 'yellow',
+                  height: 48,
+                  paddingLeft: 11,
+                  paddingRight: 11,
+                  marginLeft: 10,
+                  marginRight: 10
+                }}
+              >
+                <Flex justify="between">
+                  <TouchableOpacity>
+                    <Text>V {surah.name_latin}</Text>
+                  </TouchableOpacity>
+
+                  <Text>no. {surah.number}</Text>
+                </Flex>
+                <Flex justify="between">
+                  <Flex>
+                    <Text>Review: </Text>
+                    <Text>0</Text>
+                    <Text>0</Text>
+                    <Text>0</Text>
+                  </Flex>
+                  <Flex>
+                    <TouchableOpacity onPress={this.onSettingOpen(surah)}>
+                      <Text style={{ paddingLeft: 20 }}>:</Text>
+                    </TouchableOpacity>
+                  </Flex>
+                </Flex>
+              </WingBlank>
+            </Item>
+          ))}
+        </List>
+        <Modal
+          transparent
+          onClose={this.onClose}
+          maskClosable
+          visible={this.state.visible}
+        >
+          <Flex justify="between" style={{ marginBottom: 10 }}>
+            <Text>{this.state.nameLatin}</Text>
+            <Button title="Batal" onPress={this.onClose} />
+          </Flex>
+          <View>
+            <View style={{ marginBottom: 5 }}>
+              <Button title="Edit Hapalan" />
+            </View>
+            <View style={{ marginBottom: 5 }}>
+              <Button title="Reset Hapalan" />
+            </View>
+            <View>
+              <Button title="Delete Hapalan" />
+            </View>
+          </View>
+        </Modal>
+      </ScrollView>
+    );
+  }
+}
 
 export default ListSurah;

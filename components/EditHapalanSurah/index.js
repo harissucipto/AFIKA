@@ -1,34 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'antd-mobile-rn';
 
-import ListHapalan from './ListHapalan';
+import CardEdit from './CardEdit';
 
 const Index = ({ dataHapalan, navigation }) => {
-  const {
-    state,
-    addHapalanSurahs,
-    deleteHapalanSurah,
-    selectEditSurah
-  } = dataHapalan;
+  const { state, addHapalanSurahs, deleteHapalanSurah } = dataHapalan;
 
-  const { hapalanSurahs } = state;
+  const { editSurah } = state;
+
+  // params navigasi
+  const {
+    state: {
+      params: { number }
+    }
+  } = navigation;
 
   return (
     <View>
       <TouchableOpacity
-        onPress={() => navigation.navigate('AddHapalan')}
+        onPress={() => navigation.pop()}
         style={{ marginTop: 30, marginBottom: 30 }}
       >
-        <Text>Tambah</Text>
+        <Text>Kembali</Text>
       </TouchableOpacity>
+      <Text>Edit hapalan screen</Text>
 
-      <ListHapalan
+      <CardEdit surah={editSurah} />
+
+      {/* <ListHapalan
         navigation={navigation}
         hapalanSurahs={hapalanSurahs}
         deleteHapalanSurah={deleteHapalanSurah}
-        selectEditSurah={selectEditSurah}
-      />
+      /> */}
     </View>
   );
 };

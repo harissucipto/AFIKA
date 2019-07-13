@@ -3,6 +3,7 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 
 import HomeScreen from './HomeScreen';
 import AddHapalanScreen from './AddHapalanScreen';
+import EditHapalanScreen from './EditHapalanScreen';
 
 const AppNavigator = createStackNavigator(
   {
@@ -14,6 +15,12 @@ const AppNavigator = createStackNavigator(
     },
     AddHapalan: {
       screen: AddHapalanScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    EditHapalanScreen: {
+      screen: EditHapalanScreen,
       navigationOptions: {
         header: null
       }

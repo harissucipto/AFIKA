@@ -29,6 +29,14 @@ class ListSurah extends Component {
       ...surahSelected
     });
   };
+  onHapalanEdit = number => () => {
+    this.setState({
+      visible: false,
+      ...surahSelected
+    });
+    this.props.selectEditSurah(number);
+    this.props.navigation.navigate('EditHapalanScreen', { number });
+  };
 
   render() {
     const { hapalanSurahs } = this.props;
@@ -88,10 +96,16 @@ class ListSurah extends Component {
           </Flex>
           <View>
             <View style={{ marginBottom: 5 }}>
-              <Button title="Edit Hapalan" />
+              <Button
+                title="Edit Hapalan"
+                onPress={this.onHapalanEdit(this.state.number)}
+              />
             </View>
             <View style={{ marginBottom: 5 }}>
-              <Button title="Reset Hapalan" />
+              <Button
+                title="Reset Hapalan"
+                onPress={() => console.log('reset hapalan')}
+              />
             </View>
             <View>
               <Button

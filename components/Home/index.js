@@ -5,7 +5,7 @@ import { Button } from 'antd-mobile-rn';
 import ListHapalan from './ListHapalan';
 
 const Index = ({ dataHapalan, navigation }) => {
-  const { state, addHapalanSurahs, setQuery, clearQuery } = dataHapalan;
+  const { state, addHapalanSurahs, deleteHapalanSurah } = dataHapalan;
 
   const { hapalanSurahs } = state;
 
@@ -18,7 +18,10 @@ const Index = ({ dataHapalan, navigation }) => {
         <Text>Tambah</Text>
       </TouchableOpacity>
 
-      <ListHapalan hapalanSurahs={hapalanSurahs} />
+      <ListHapalan
+        hapalanSurahs={hapalanSurahs}
+        deleteHapalanSurah={deleteHapalanSurah}
+      />
     </View>
   );
 };

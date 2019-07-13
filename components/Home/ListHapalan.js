@@ -22,6 +22,13 @@ class ListSurah extends Component {
       nameLatin: surah.name_latin,
       number: surah.number
     });
+  onHapalanDelete = number => () => {
+    this.props.deleteHapalanSurah(number);
+    this.setState({
+      visible: false,
+      ...surahSelected
+    });
+  };
 
   render() {
     const { hapalanSurahs } = this.props;
@@ -87,7 +94,10 @@ class ListSurah extends Component {
               <Button title="Reset Hapalan" />
             </View>
             <View>
-              <Button title="Delete Hapalan" />
+              <Button
+                title="Delete Hapalan"
+                onPress={this.onHapalanDelete(this.state.number)}
+              />
             </View>
           </View>
         </Modal>

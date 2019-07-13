@@ -15,6 +15,11 @@ class DataHapalan extends Container {
       hapalanSurahs: [...hapalanSurahs, surah]
     }));
 
+  deleteHapalanSurah = number =>
+    this.setState(({ hapalanSurahs }) => ({
+      hapalanSurahs: hapalanSurahs.filter(surah => surah.number !== number)
+    }));
+
   setQuery = value => this.setState({ querySurah: value });
   clearQuery = () => this.setState({ querySurah: '' });
 }

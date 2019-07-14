@@ -49,8 +49,9 @@ class DataHapalan extends Container {
 
   editDisplayHapalanAyats = data => {
     const { number, displayHapalanAyats } = data;
-    this.setState(({ surahs, editSurah }) => ({
-      surahs: surahs.map(item =>
+
+    this.setState(({ hapalanSurahs, editSurah }) => ({
+      hapalanSurahs: hapalanSurahs.map(item =>
         item.number === number ? { ...item, displayHapalanAyats } : item
       ),
       editSurah: { ...editSurah, displayHapalanAyats }

@@ -38,12 +38,12 @@ class DataHapalan extends Container {
           ...surah,
           displayHapalanAyats: [],
           dateInit: new Date(),
-          dataBelajar: [
-            [...Array(Number(surah.number_of_ayah)).keys()].map(x => ({
+          dataBelajar: [...Array(Number(surah.number_of_ayah)).keys()].map(
+            x => ({
               number: x + 1,
               supermemo: supermemo2()
-            }))
-          ]
+            })
+          )
         }
       ]
     }));
@@ -69,6 +69,17 @@ class DataHapalan extends Container {
         item.number === number ? { ...item, displayHapalanAyats } : item
       ),
       editSurah: { ...editSurah, displayHapalanAyats }
+    }));
+  };
+
+  updateBelajarHapalan = data => {
+    const { number, dataBelajar } = data;
+
+    this.setState(({ hapalanSurahs, editSurah }) => ({
+      hapalanSurahs: hapalanSurahs.map(item =>
+        item.number === number ? { ...item, dataBelajar } : item
+      ),
+      editSurah: { ...editSurah, dataBelajar }
     }));
   };
 }

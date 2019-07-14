@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import supermemo2 from 'supermemo2';
 import { ScrollView, View, Text, Picker, Button } from 'react-native';
 import {
   WingBlank,
@@ -77,13 +78,41 @@ class CardEdit extends Component {
     this.setState({ isJawab: true });
   };
 
-  nextAyat = () => {
+  nextAyat = kualitasHapalan => {
     const { listAyat, selectAyat } = this.state;
     const indexListAyat = listAyat.findIndex(number => number === selectAyat);
+
+    // mapping hapalan
+    const dataBelajar = this.props.surah.dataBelajar.find(item => {
+      return item.number === selectAyat;
+    });
+    const { factor, schedule, isRepeatAgain } = dataBelajar.supermemo;
+    const updateDataBelajar = {
+      ...dataBelajar,
+      supermemo: supermemo2(kualitasHapalan, schedule, factor)
+    };
+    const mergeDataBelajar = this.props.surah.dataBelajar.map(item => {
+      return item.number === selectAyat ? updateDataBelajar : item;
+    });
+
+    this.props.updateBelajarHapalan({
+      number: selectAyat,
+      dataBelajar: mergeDataBelajar
+    });
+
+    console.log(mergeDataBelajar, 'gabung');
+
+    // tentukan index pindah
     const indexPindahAyat =
       indexListAyat === listAyat.length - 1 ? indexListAyat : indexListAyat + 1;
 
-    const newSelectAyat = listAyat[indexPindahAyat];
+    // pindah
+    const newSelectAyat =
+      listAyat[
+        updateDataBelajar.supermemo.isRepeatAgain
+          ? indexListAyat
+          : indexPindahAyat
+      ];
     this.changeAyat(newSelectAyat);
   };
 
@@ -101,15 +130,15 @@ class CardEdit extends Component {
   };
 
   onHard = () => {
-    this.nextAyat();
+    this.nextAyat(1);
   };
 
   onGood = () => {
-    this.nextAyat();
+    this.nextAyat(4);
   };
 
   onEasy = () => {
-    this.nextAyat();
+    this.nextAyat(5);
   };
 
   simpanEdit = () => {

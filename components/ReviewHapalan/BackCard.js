@@ -40,7 +40,7 @@ function BackCard(props) {
       )}
       <WingBlank style={{ marginTop: 20 }}>
         <Flex justify="around">
-          <Button title="Again" onPress={hard} />
+          <Button title="Hard" onPress={hard} />
           <Button title="Good" onPress={good} />
           <Button title="Easy" onPress={easy} />
         </Flex>

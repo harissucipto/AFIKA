@@ -8,4 +8,4 @@ const test2 = supermemo2();
 
 console.log(test2);
 
-console.log(supermemo2(5, test2.schedule, test2.factor));
+console.log(supermemo2(4, test2.schedule, test2.factor));

@@ -6,12 +6,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 import CardReview from './CardReview';
 
 const Index = ({ dataHapalan, navigation }) => {
-  const {
-    state,
-    addHapalanSurahs,
-    deleteHapalanSurah,
-    editDisplayHapalanAyats
-  } = dataHapalan;
+  const { state, updateBelajarHapalan, editDisplayHapalanAyats } = dataHapalan;
 
   const { editSurah, surah } = state;
 
@@ -36,6 +31,7 @@ const Index = ({ dataHapalan, navigation }) => {
         surah={editSurah}
         navigation={navigation}
         editDisplayHapalanAyats={editDisplayHapalanAyats}
+        updateBelajarHapalan={updateBelajarHapalan}
       />
     </ScrollView>
   );

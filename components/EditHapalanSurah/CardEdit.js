@@ -140,8 +140,6 @@ class CardEdit extends Component {
       number: selectAyat
     };
 
-    console.log([...filterData, newData], 'data mapped');
-
     this.props.editDisplayHapalanAyats({
       number: this.props.surah.number,
       displayHapalanAyats: [...filterData, newData]

@@ -38,6 +38,16 @@ class ListSurah extends Component {
     this.props.navigation.navigate('EditHapalanScreen', { number });
   };
 
+  onHapalanReview = number => () => {
+    console.log(number, 'numbernya');
+    this.setState({
+      visible: false,
+      ...surahSelected
+    });
+    this.props.selectEditSurah(number);
+    this.props.navigation.navigate('ReviewHapalanScreen', { number });
+  };
+
   render() {
     const { hapalanSurahs } = this.props;
     const footerButtons = [
@@ -61,7 +71,9 @@ class ListSurah extends Component {
                 }}
               >
                 <Flex justify="between">
-                  <TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={this.onHapalanReview(surah.number)}
+                  >
                     <Text>V {surah.name_latin}</Text>
                   </TouchableOpacity>
 

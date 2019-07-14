@@ -1,5 +1,6 @@
 import { Container } from 'unstated';
 import _ from 'lodash';
+import supermemo2 from 'supermemo2';
 
 import { surahs } from '../assets/surahs';
 
@@ -31,7 +32,20 @@ class DataHapalan extends Container {
 
   addHapalanSurahs = surah =>
     this.setState(({ hapalanSurahs }) => ({
-      hapalanSurahs: [...hapalanSurahs, { ...surah, displayHapalanAyats: [] }]
+      hapalanSurahs: [
+        ...hapalanSurahs,
+        {
+          ...surah,
+          displayHapalanAyats: [],
+          dateInit: new Date(),
+          dataBelajar: [
+            [...Array(Number(surah.number_of_ayah)).keys()].map(x => ({
+              number: x + 1,
+              supermemo: supermemo2()
+            }))
+          ]
+        }
+      ]
     }));
 
   deleteHapalanSurah = number =>

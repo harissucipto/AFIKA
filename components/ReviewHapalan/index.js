@@ -1,13 +1,26 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'antd-mobile-rn';
-
-import CardEdit from './CardEdit';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import CardReview from './CardReview';
+
 const Index = ({ dataHapalan, navigation }) => {
-  const { state, editDisplayHapalanAyats } = dataHapalan;
-  const { editSurah } = state;
+  const {
+    state,
+    addHapalanSurahs,
+    deleteHapalanSurah,
+    editDisplayHapalanAyats
+  } = dataHapalan;
+
+  const { editSurah, surah } = state;
+
+  // params navigasi
+  const {
+    state: {
+      params: { number }
+    }
+  } = navigation;
 
   return (
     <ScrollView>
@@ -17,9 +30,9 @@ const Index = ({ dataHapalan, navigation }) => {
       >
         <Text>Kembali</Text>
       </TouchableOpacity>
-      <Text>Edit hapalan screen</Text>
+      <Text>Review hapalan screen</Text>
 
-      <CardEdit
+      <CardReview
         surah={editSurah}
         navigation={navigation}
         editDisplayHapalanAyats={editDisplayHapalanAyats}

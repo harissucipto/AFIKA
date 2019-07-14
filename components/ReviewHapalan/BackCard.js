@@ -10,7 +10,10 @@ function BackCard(props) {
     deskripsi,
     surah,
     number,
-    deskripsiBackCard
+    deskripsiBackCard,
+    hard,
+    good,
+    easy
   } = props;
 
   return (
@@ -37,9 +40,9 @@ function BackCard(props) {
       )}
       <WingBlank style={{ marginTop: 20 }}>
         <Flex justify="around">
-          <Button title="Again" />
-          <Button title="Good" />
-          <Button title="Easy" />
+          <Button title="Again" onPress={hard} />
+          <Button title="Good" onPress={good} />
+          <Button title="Easy" onPress={easy} />
         </Flex>
       </WingBlank>
     </View>

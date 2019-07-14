@@ -77,17 +77,39 @@ class CardEdit extends Component {
     this.setState({ isJawab: true });
   };
 
-  changeAyat = (itemValue, itemIndex) => {
+  nextAyat = () => {
+    const { listAyat, selectAyat } = this.state;
+    const indexListAyat = listAyat.findIndex(number => number === selectAyat);
+    const indexPindahAyat =
+      indexListAyat === listAyat.length - 1 ? indexListAyat : indexListAyat + 1;
+
+    const newSelectAyat = listAyat[indexPindahAyat];
+    this.changeAyat(newSelectAyat);
+  };
+
+  changeAyat = itemValue => {
     const displayHapalanAyat = this.props.surah.displayHapalanAyats.find(
       item => item.number === itemValue
     );
 
-    this.setState({ selectAyat: itemValue });
+    this.setState({ selectAyat: itemValue, isJawab: false });
     if (displayHapalanAyat) {
       this.setState({ ...displayHapalanAyat });
     } else {
       this.setState({ ...initDisplayHapalanAyat });
     }
+  };
+
+  onHard = () => {
+    this.nextAyat();
+  };
+
+  onGood = () => {
+    this.nextAyat();
+  };
+
+  onEasy = () => {
+    this.nextAyat();
   };
 
   simpanEdit = () => {
@@ -155,6 +177,9 @@ class CardEdit extends Component {
             number={selectAyat}
             {...dataBackCard}
             deskripsiBackCard={deskripsiBackCard}
+            hard={this.onHard}
+            good={this.onGood}
+            easy={this.onEasy}
           />
         )}
       </ScrollView>

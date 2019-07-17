@@ -46,16 +46,16 @@ class ListSurah extends Component {
     console.log(number, 'numbernya');
     const isAdaHapalan = dataBelajar.filter(item => {
       const nextReview = schduleToDate(item.supermemo.schedule);
-      return isScheduleNow(
-        new moment(),
-        new moment(item.terakhirReview),
-        new moment(nextReview)
+      return (
+        isScheduleNow(
+          new moment(),
+          new moment(item.terakhirReview),
+          new moment(nextReview)
+        ) || !item.terakhirReview
       );
     }).length;
 
-    const totalBaru = dataBelajar.filter(item => !item.terakhirReview).length;
-
-    if (isAdaHapalan || totalBaru) {
+    if (isAdaHapalan) {
       this.setState({
         visible: false,
         ...surahSelected

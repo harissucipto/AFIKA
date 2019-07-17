@@ -29,7 +29,9 @@ class JumlahReview extends Component {
   countNanti = () => {
     const totalNanti = this.props.surah.dataBelajar.filter(item => {
       const nextReview = schduleToDate(item.supermemo.schedule);
-      return new moment(nextReview).isAfter(new moment(), 'd');
+      return (
+        new moment(nextReview).isAfter(new moment(), 'd') && item.terakhirReview
+      );
     }).length;
     return totalNanti;
   };

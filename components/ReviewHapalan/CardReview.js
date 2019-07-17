@@ -9,7 +9,9 @@ import {
   TextareaItem,
   WhiteSpace
 } from 'antd-mobile-rn';
+import moment from 'moment';
 
+import { isScheduleNow, schduleToDate } from '../../unstated/utils';
 import FrontCard from './FrontCard';
 import BackCard from './BackCard';
 
@@ -32,7 +34,7 @@ const initDisplayHapalanAyat = {
 
 class CardEdit extends Component {
   state = {
-    selectAyat: 1,
+    selectAyat: 0,
     listAyat: [],
     isJawab: false,
     dataFrontCard: {},
@@ -44,11 +46,25 @@ class CardEdit extends Component {
   componentWillReceiveProps(props) {
     const { surah } = props;
     if (surah) {
-      const { number_of_ayah, displayHapalanAyats } = surah;
+      const { number_of_ayah, displayHapalanAyats, dataBelajar } = surah;
+
+      const listAyat = dataBelajar
+        .filter(item => {
+          const nextReview = schduleToDate(item.supermemo.schedule);
+          return (
+            isScheduleNow(
+              new moment(),
+              new moment(item.terakhirReview),
+              new moment(nextReview)
+            ) || !item.terakhirReview
+          );
+        })
+        .map(item => Number(item.number));
 
       this.getDisplayHapalanAyat(displayHapalanAyats);
       this.setState({
-        listAyat: [...Array(Number(number_of_ayah)).keys()].map(x => x + 1)
+        listAyat,
+        selectAyat: listAyat[0]
       });
     }
   }
@@ -82,16 +98,26 @@ class CardEdit extends Component {
     const { listAyat, selectAyat } = this.state;
     const indexListAyat = listAyat.findIndex(number => number === selectAyat);
 
+    console.log(listAyat, 'list ayat');
     // mapping hapalan
     const dataBelajar = this.props.surah.dataBelajar.find(item => {
       return item.number === selectAyat;
     });
-    const { factor, schedule, isRepeatAgain } = dataBelajar.supermemo;
+    const {
+      factor,
+      schedule,
+      isRepeatAgain,
+      terakhirReview
+    } = dataBelajar.supermemo;
     const updateDataBelajar = {
       ...dataBelajar,
-      supermemo: supermemo2(kualitasHapalan, schedule, factor),
-      terakhirReview: new Date()
+      supermemo: supermemo2(kualitasHapalan, schedule, factor)
     };
+
+    updateDataBelajar.terakhirReview = updateDataBelajar.supermemo.isRepeatAgain
+      ? terakhirReview
+      : new Date();
+
     const mergeDataBelajar = this.props.surah.dataBelajar.map(item => {
       return item.number === selectAyat ? updateDataBelajar : item;
     });

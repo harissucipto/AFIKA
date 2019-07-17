@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { ScrollView, Text, TouchableOpacity, View, Button } from 'react-native';
 import { List, WingBlank, Flex, Modal } from 'antd-mobile-rn';
+import moment from 'moment';
 
+import { schduleToDate, isScheduleNow } from '../../unstated/utils';
 import JumlahReview from './JumlahReview';
 
 const { Item } = List;
@@ -40,14 +42,27 @@ class ListSurah extends Component {
     this.props.navigation.navigate('EditHapalanScreen', { number });
   };
 
-  onHapalanReview = number => () => {
+  onHapalanReview = (number, dataBelajar) => () => {
     console.log(number, 'numbernya');
-    this.setState({
-      visible: false,
-      ...surahSelected
-    });
-    this.props.selectEditSurah(number);
-    this.props.navigation.navigate('ReviewHapalanScreen', { number });
+    const isAdaHapalan = dataBelajar.filter(item => {
+      const nextReview = schduleToDate(item.supermemo.schedule);
+      return isScheduleNow(
+        new moment(),
+        new moment(item.terakhirReview),
+        new moment(nextReview)
+      );
+    }).length;
+
+    const totalBaru = dataBelajar.filter(item => !item.terakhirReview).length;
+
+    if (isAdaHapalan || totalBaru) {
+      this.setState({
+        visible: false,
+        ...surahSelected
+      });
+      this.props.selectEditSurah(number);
+      this.props.navigation.navigate('ReviewHapalanScreen', { number });
+    }
   };
 
   render() {
@@ -74,7 +89,10 @@ class ListSurah extends Component {
               >
                 <Flex justify="between">
                   <TouchableOpacity
-                    onPress={this.onHapalanReview(surah.number)}
+                    onPress={this.onHapalanReview(
+                      surah.number,
+                      surah.dataBelajar
+                    )}
                   >
                     <Text>V {surah.name_latin}</Text>
                   </TouchableOpacity>

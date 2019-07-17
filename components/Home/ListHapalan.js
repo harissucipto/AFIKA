@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { ScrollView, Text, TouchableOpacity, View, Button } from 'react-native';
 import { List, WingBlank, Flex, Modal } from 'antd-mobile-rn';
 
+import JumlahReview from './JumlahReview';
+
 const { Item } = List;
 
 const surahSelected = {
@@ -80,12 +82,7 @@ class ListSurah extends Component {
                   <Text>no. {surah.number}</Text>
                 </Flex>
                 <Flex justify="between">
-                  <Flex>
-                    <Text>Review: </Text>
-                    <Text>0</Text>
-                    <Text>0</Text>
-                    <Text>0</Text>
-                  </Flex>
+                  <JumlahReview surah={surah} />
                   <Flex>
                     <TouchableOpacity onPress={this.onSettingOpen(surah)}>
                       <Text style={{ paddingLeft: 20 }}>:</Text>

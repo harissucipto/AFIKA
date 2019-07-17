@@ -17,6 +17,8 @@ const Index = ({ dataHapalan, navigation }) => {
     }
   } = navigation;
 
+  console.log(editSurah.dataBelajar, 'update surah data Belajar');
+
   return (
     <ScrollView>
       <TouchableOpacity

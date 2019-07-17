@@ -41,7 +41,8 @@ class DataHapalan extends Container {
           dataBelajar: [...Array(Number(surah.number_of_ayah)).keys()].map(
             x => ({
               number: x + 1,
-              supermemo: supermemo2()
+              supermemo: supermemo2(),
+              terakhirReview: null
             })
           )
         }
@@ -76,9 +77,9 @@ class DataHapalan extends Container {
     const { number, dataBelajar } = data;
 
     this.setState(({ hapalanSurahs, editSurah }) => ({
-      hapalanSurahs: hapalanSurahs.map(item =>
-        item.number === number ? { ...item, dataBelajar } : item
-      ),
+      hapalanSurahs: hapalanSurahs.map(item => {
+        return item.number === number ? { ...item, dataBelajar } : item;
+      }),
       editSurah: { ...editSurah, dataBelajar }
     }));
   };

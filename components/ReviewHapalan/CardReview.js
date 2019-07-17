@@ -89,18 +89,17 @@ class CardEdit extends Component {
     const { factor, schedule, isRepeatAgain } = dataBelajar.supermemo;
     const updateDataBelajar = {
       ...dataBelajar,
-      supermemo: supermemo2(kualitasHapalan, schedule, factor)
+      supermemo: supermemo2(kualitasHapalan, schedule, factor),
+      terakhirReview: new Date()
     };
     const mergeDataBelajar = this.props.surah.dataBelajar.map(item => {
       return item.number === selectAyat ? updateDataBelajar : item;
     });
 
     this.props.updateBelajarHapalan({
-      number: selectAyat,
+      number: this.props.surah.number,
       dataBelajar: mergeDataBelajar
     });
-
-    console.log(mergeDataBelajar, 'gabung');
 
     // tentukan index pindah
     const indexPindahAyat =

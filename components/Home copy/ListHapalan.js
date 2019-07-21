@@ -3,8 +3,6 @@ import { ScrollView, Text, TouchableOpacity, View, Button } from 'react-native';
 import { List, WingBlank, Flex, Modal } from 'antd-mobile-rn';
 import moment from 'moment';
 
-import { primary } from '../Theme/Color';
-import { JAC } from '../Theme/Text';
 import { schduleToDate, isScheduleNow } from '../../unstated/utils';
 import JumlahReview from './JumlahReview';
 
@@ -78,38 +76,17 @@ class ListSurah extends Component {
       <ScrollView>
         <List>
           {hapalanSurahs.map(surah => (
-            <Item key={surah.number} style={{ backgroundColor: primary }}>
+            <Item key={surah.number}>
               <WingBlank
                 style={{
-                  backgroundColor: 'white',
-                  height: 80,
+                  backgroundColor: 'yellow',
+                  height: 48,
                   paddingLeft: 11,
                   paddingRight: 11,
                   marginLeft: 10,
-                  marginRight: 10,
-                  borderRadius: 8
+                  marginRight: 10
                 }}
               >
-                <Flex
-                  justify="between"
-                  style={{
-                    paddingTop: 10,
-                    paddingBottom: 5,
-                    paddingLeft: 10,
-                    paddingRight: 5
-                  }}
-                >
-                  <TouchableOpacity
-                    onPress={this.onHapalanReview(
-                      surah.number,
-                      surah.dataBelajar
-                    )}
-                  >
-                    <JAC>{surah.name_latin}</JAC>
-                  </TouchableOpacity>
-
-                  <JAC>No. {surah.number}</JAC>
-                </Flex>
                 <Flex justify="between">
                   <TouchableOpacity
                     onPress={this.onHapalanReview(
@@ -117,20 +94,16 @@ class ListSurah extends Component {
                       surah.dataBelajar
                     )}
                   >
-                    <JumlahReview surah={surah} />
+                    <Text>V {surah.name_latin}</Text>
                   </TouchableOpacity>
+
+                  <Text>no. {surah.number}</Text>
+                </Flex>
+                <Flex justify="between">
+                  <JumlahReview surah={surah} />
                   <Flex>
                     <TouchableOpacity onPress={this.onSettingOpen(surah)}>
-                      <Text
-                        style={{
-                          paddingLeft: 20,
-                          fontSize: 20,
-                          color: 'red',
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        :
-                      </Text>
+                      <Text style={{ paddingLeft: 20 }}>:</Text>
                     </TouchableOpacity>
                   </Flex>
                 </Flex>

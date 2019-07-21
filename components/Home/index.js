@@ -1,8 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { Button } from 'antd-mobile-rn';
 
+import { Container, Header } from '../Theme/Container';
+import { H1, H3, H5 } from '../Theme/Text';
 import ListHapalan from './ListHapalan';
+import menu from '../../assets/menu.png';
+import add from '../../assets/add.png';
+
+import HeaderHome from '../Theme/HeaderHome';
+import { ScrollView } from 'react-native-gesture-handler';
 
 const Index = ({ dataHapalan, navigation }) => {
   const {
@@ -13,23 +20,25 @@ const Index = ({ dataHapalan, navigation }) => {
   } = dataHapalan;
 
   const { hapalanSurahs } = state;
+  const countHapalan = dataHapalan.length > 0 ? dataHapalan.length : '0';
 
   return (
-    <View>
-      <TouchableOpacity
-        onPress={() => navigation.navigate('AddHapalan')}
-        style={{ marginTop: 30, marginBottom: 30 }}
-      >
-        <Text>Tambah</Text>
-      </TouchableOpacity>
-
-      <ListHapalan
-        navigation={navigation}
-        hapalanSurahs={hapalanSurahs}
-        deleteHapalanSurah={deleteHapalanSurah}
-        selectEditSurah={selectEditSurah}
-      />
-    </View>
+    <Container>
+      <HeaderHome countHapalan={countHapalan} navigation={navigation} />
+      <View style={{ flex: 1 }}>
+        <ListHapalan
+          navigation={navigation}
+          hapalanSurahs={hapalanSurahs}
+          deleteHapalanSurah={deleteHapalanSurah}
+          selectEditSurah={selectEditSurah}
+        />
+      </View>
+      <View style={{ alignItems: 'flex-end' }}>
+        <TouchableOpacity onPress={() => navigation.navigate('AddHapalan')}>
+          <Image source={add} />
+        </TouchableOpacity>
+      </View>
+    </Container>
   );
 };
 

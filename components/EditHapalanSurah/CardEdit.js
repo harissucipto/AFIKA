@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, View, Text, Picker, Button } from 'react-native';
+import {
+  ScrollView,
+  View,
+  Text,
+  Picker,
+  Button,
+  KeyboardAvoidingView
+} from 'react-native';
 import {
   WingBlank,
   Flex,
@@ -8,6 +15,8 @@ import {
   TextareaItem,
   WhiteSpace
 } from 'antd-mobile-rn';
+import { primary } from '../Theme/Color';
+import { JAC } from '../Theme/Text';
 
 const initDisplayHapalanAyat = {
   dataFrontCard: {
@@ -72,14 +81,28 @@ class CardEdit extends Component {
   renderAyat = () => {
     return (
       <>
-        <Text style={{ justifyContent: 'center', marginTop: 5 }}>
+        <Text
+          style={{
+            fontSize: 24,
+            fontWeight: 'bold',
+            color: primary,
+
+            lineHeight: 44
+          }}
+        >
           {this.props.surah.text[this.state.selectAyat]}
         </Text>
+
+        <WhiteSpace />
+        <WhiteSpace />
         <Text
-          style={{ justifyContent: 'center', marginBottom: 10, marginTop: 5 }}
+          style={{
+            justifyContent: 'center'
+          }}
         >
           {this.props.surah.translations.id.text[this.state.selectAyat]}
         </Text>
+        <WhiteSpace />
       </>
     );
   };
@@ -154,136 +177,157 @@ class CardEdit extends Component {
     const { name_latin } = this.props.surah;
 
     return (
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
-        style={{
-          flex: 1,
-          backgroundColor: 'white',
-          margin: 20,
-          borderRadius: 10,
-          padding: 10
-        }}
-      >
-        <WingBlank>
-          <Text>{name_latin}</Text>
-        </WingBlank>
-        <WingBlank>
-          <Flex justify="between">
-            <Text>Pilih Ayat</Text>
-            <Picker
-              selectedValue={selectAyat}
-              style={{ height: 50, width: 100 }}
-              onValueChange={this.changeAyat}
+      <KeyboardAvoidingView behavior="padding" style={{ flex: 1 }}>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={{
+            flex: 1,
+            backgroundColor: 'white',
+            margin: 20,
+            borderRadius: 10,
+            padding: 10
+          }}
+        >
+          <WingBlank>
+            <Text style={{ fontWeight: 'bold', fontSize: 16 }}>
+              {name_latin}
+            </Text>
+          </WingBlank>
+          <WingBlank>
+            <Flex justify="between">
+              <Text>Pilih Ayat</Text>
+              <WhiteSpace />
+              <Picker
+                selectedValue={selectAyat}
+                style={{ height: 50, width: 100 }}
+                onValueChange={this.changeAyat}
+              >
+                {listAyat.map(({ label, value }) => (
+                  <Picker.Item label={label} value={value} key={label} />
+                ))}
+              </Picker>
+
+              <Button
+                title="prev"
+                disabled={this.state.selectAyat <= 1}
+                style={{ marginRight: 4 }}
+                onPress={() => this.changeAyat(this.state.selectAyat - 1, 0)}
+              />
+              <Button
+                title="next"
+                disabled={this.state.selectAyat >= this.state.listAyat.length}
+                style={{ marginRight: 4 }}
+                onPress={() => this.changeAyat(this.state.selectAyat + 1, 0)}
+              />
+            </Flex>
+          </WingBlank>
+
+          <WhiteSpace />
+
+          <WingBlank>
+            <Text style={{ fontWeight: 'bold' }}>
+              Preview Ayat dan Terjemahan:{' '}
+            </Text>
+            <WhiteSpace />
+            {this.renderAyat()}
+          </WingBlank>
+
+          <WingBlank>
+            <WhiteSpace />
+            <Text style={{ fontWeight: 'bold' }}>Kontent Front Card:</Text>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeFrontCheckBox('text')}
+              checked={this.state.dataFrontCard.text}
             >
-              {listAyat.map(({ label, value }) => (
-                <Picker.Item label={label} value={value} key={label} />
-              ))}
-            </Picker>
+              Ayat
+            </Checkbox>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeFrontCheckBox('translations')}
+              checked={this.state.dataFrontCard.translations}
+            >
+              Terjemahan
+            </Checkbox>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeFrontCheckBox('numberAyat')}
+              checked={this.state.dataFrontCard.numberAyat}
+            >
+              Nomor Ayat
+            </Checkbox>
+            <WhiteSpace />
+            <Checkbox
+              style={{ marginBottom: 5 }}
+              onChange={this.changeFrontCheckBox('deskripsi')}
+              checked={this.state.dataFrontCard.deskripsi}
+            >
+              Deskripsi
+            </Checkbox>
+            <WhiteSpace />
+            {this.state.dataFrontCard.deskripsi && (
+              <TextareaItem
+                rows={4}
+                placeholder="Deskripsi Front Card"
+                value={this.state.deskripsiFrontCard}
+                onChange={value => this.setState({ deskripsiFrontCard: value })}
+              />
+            )}
+          </WingBlank>
 
+          <WingBlank style={{ marginBottom: 30 }}>
+            <Text style={{ fontWeight: 'bold' }}>Kontent Back Card:</Text>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeBackCheckBox('text')}
+              checked={this.state.dataBackCard.text}
+            >
+              Ayat
+            </Checkbox>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeBackCheckBox('translations')}
+              checked={this.state.dataBackCard.translations}
+            >
+              Terjemahan
+            </Checkbox>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeBackCheckBox('numberAyat')}
+              checked={this.state.dataBackCard.numberAyat}
+            >
+              Nomor Ayat
+            </Checkbox>
+            <WhiteSpace />
+            <Checkbox
+              onChange={this.changeBackCheckBox('deskripsi')}
+              checked={this.state.dataBackCard.deskripsi}
+              style={{ marginBottom: 5 }}
+            >
+              Deskripsi
+            </Checkbox>
+            <WhiteSpace />
+
+            {this.state.dataBackCard.deskripsi && (
+              <TextareaItem
+                rows={4}
+                placeholder="Deskripsi Back Card"
+                value={this.state.deskripsiBackCard}
+                onChange={value => this.setState({ deskripsiBackCard: value })}
+              />
+            )}
+          </WingBlank>
+
+          <View style={{ marginBottom: 30 }}>
             <Button
-              title="prev"
-              disabled={this.state.selectAyat <= 1}
-              style={{ marginRight: 4 }}
-              onPress={() => this.changeAyat(this.state.selectAyat - 1, 0)}
+              title={'Simpan Perubahan Ayat ke ' + this.state.selectAyat}
+              onPress={this.simpanEdit}
             />
-            <Button
-              title="next"
-              disabled={this.state.selectAyat >= this.state.listAyat.length}
-              style={{ marginRight: 4 }}
-              onPress={() => this.changeAyat(this.state.selectAyat + 1, 0)}
-            />
-          </Flex>
-        </WingBlank>
-
-        <WhiteSpace />
-
-        <WingBlank>
-          <Text>Preview Ayat dan Terjemahan: </Text>
-          {this.renderAyat()}
-        </WingBlank>
-
-        <WingBlank>
-          <Text>Kontent Front Card:</Text>
-          <Checkbox
-            onChange={this.changeFrontCheckBox('text')}
-            checked={this.state.dataFrontCard.text}
-          >
-            Ayat
-          </Checkbox>
-          <Checkbox
-            onChange={this.changeFrontCheckBox('translations')}
-            checked={this.state.dataFrontCard.translations}
-          >
-            Terjemahan
-          </Checkbox>
-          <Checkbox
-            onChange={this.changeFrontCheckBox('numberAyat')}
-            checked={this.state.dataFrontCard.numberAyat}
-          >
-            Nomor Ayat
-          </Checkbox>
-          <Checkbox
-            style={{ marginBottom: 5 }}
-            onChange={this.changeFrontCheckBox('deskripsi')}
-            checked={this.state.dataFrontCard.deskripsi}
-          >
-            Deskripsi
-          </Checkbox>
-          {this.state.dataFrontCard.deskripsi && (
-            <TextareaItem
-              rows={4}
-              placeholder="Deskripsi Front Card"
-              value={this.state.deskripsiFrontCard}
-              onChange={value => this.setState({ deskripsiFrontCard: value })}
-            />
-          )}
-        </WingBlank>
-
-        <WingBlank>
-          <Text>Kontent Back Card:</Text>
-          <Checkbox
-            onChange={this.changeBackCheckBox('text')}
-            checked={this.state.dataBackCard.text}
-          >
-            Ayat
-          </Checkbox>
-          <Checkbox
-            onChange={this.changeBackCheckBox('translations')}
-            checked={this.state.dataBackCard.translations}
-          >
-            Terjemahan
-          </Checkbox>
-          <Checkbox
-            onChange={this.changeBackCheckBox('numberAyat')}
-            checked={this.state.dataBackCard.numberAyat}
-          >
-            Nomor Ayat
-          </Checkbox>
-          <Checkbox
-            onChange={this.changeBackCheckBox('deskripsi')}
-            checked={this.state.dataBackCard.deskripsi}
-            style={{ marginBottom: 5 }}
-          >
-            Deskripsi
-          </Checkbox>
-
-          {this.state.dataBackCard.deskripsi && (
-            <TextareaItem
-              rows={4}
-              placeholder="Deskripsi Front Card"
-              value={this.state.deskripsiBackCard}
-              onChange={value => this.setState({ deskripsiBackCard: value })}
-            />
-          )}
-        </WingBlank>
-
-        <Button
-          title={'Simpan Perubahan Ayat ke ' + this.state.selectAyat}
-          onPress={this.simpanEdit}
-        />
-      </ScrollView>
+          </View>
+        </ScrollView>
+      </KeyboardAvoidingView>
     );
   }
 }

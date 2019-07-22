@@ -3,8 +3,6 @@ import { ScrollView, Text } from 'react-native';
 import { List, Flex } from 'antd-mobile-rn';
 
 import { nameSurahCard, filterSurahBelumDihapal } from './utils';
-import { primary } from '../Theme/Color';
-import { JAC } from '../Theme/Text';
 
 const { Item } = List;
 
@@ -17,25 +15,20 @@ const ListSurah = ({ surahs, hapalanSurahs, addHapalanSurahs }) => {
     <ScrollView>
       <List>
         {surahBelumDitambahkan.map(surah => (
-          <Item
-            key={surah.number}
-            onClick={() => addHapalanSurahs(surah)}
-            style={{ backgroundColor: primary }}
-          >
+          <Item key={surah.number} onClick={() => addHapalanSurahs(surah)}>
             <Flex
               justify="between"
               style={{
-                backgroundColor: 'white',
+                backgroundColor: 'yellow',
                 height: 48,
                 paddingLeft: 11,
                 paddingRight: 11,
                 marginLeft: 10,
-                marginRight: 10,
-                borderRadius: 8
+                marginRight: 10
               }}
             >
-              <JAC>+ {surah.name_latin}</JAC>
-              <JAC>no. {surah.number}</JAC>
+              <Text>+ {surah.name_latin}</Text>
+              <Text>no. {surah.number}</Text>
             </Flex>
           </Item>
         ))}

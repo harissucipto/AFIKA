@@ -15,3 +15,12 @@ export const Header = styled.View`
   background-color: ${secondary};
   padding-bottom: 20px;
 `;
+
+export const Header2 = styled.View`
+  height: 210px;
+  padding-top: 55px;
+  padding-left: 17px;
+  background-color: ${secondary};
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+`;

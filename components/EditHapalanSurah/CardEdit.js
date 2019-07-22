@@ -158,6 +158,13 @@ class CardEdit extends Component {
         automaticallyAdjustContentInsets={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          margin: 20,
+          borderRadius: 10,
+          padding: 10
+        }}
       >
         <WingBlank>
           <Text>{name_latin}</Text>

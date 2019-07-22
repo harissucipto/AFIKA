@@ -20,7 +20,7 @@ const Index = ({ dataHapalan, navigation }) => {
   } = dataHapalan;
 
   const { hapalanSurahs } = state;
-  const countHapalan = dataHapalan.length > 0 ? dataHapalan.length : '0';
+  const countHapalan = hapalanSurahs.length || '0';
 
   return (
     <Container>

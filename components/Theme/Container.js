@@ -24,3 +24,12 @@ export const Header2 = styled.View`
   padding-bottom: 20px;
   margin-bottom: 10px;
 `;
+
+export const Header3 = styled.View`
+  height: 140px;
+  padding-top: 55px;
+  padding-left: 17px;
+  background-color: ${secondary};
+  padding-bottom: 20px;
+  margin-bottom: 10px;
+`;

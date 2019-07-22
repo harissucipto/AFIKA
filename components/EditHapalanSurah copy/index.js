@@ -2,8 +2,6 @@ import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'antd-mobile-rn';
 
-import { Container } from '../Theme/Container';
-import HeaderBack from '../Theme/HeaderBack';
 import CardEdit from './CardEdit';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -12,15 +10,21 @@ const Index = ({ dataHapalan, navigation }) => {
   const { editSurah } = state;
 
   return (
-    <Container>
-      <HeaderBack navigation={navigation} text="Edit Hapalan" />
+    <ScrollView>
+      <TouchableOpacity
+        onPress={() => navigation.pop()}
+        style={{ marginTop: 30, marginBottom: 30 }}
+      >
+        <Text>Kembali</Text>
+      </TouchableOpacity>
+      <Text>Edit hapalan screen</Text>
 
       <CardEdit
         surah={editSurah}
         navigation={navigation}
         editDisplayHapalanAyats={editDisplayHapalanAyats}
       />
-    </Container>
+    </ScrollView>
   );
 };
 

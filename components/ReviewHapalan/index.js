@@ -3,6 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native';
 import { Button } from 'antd-mobile-rn';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import { Container } from '../Theme/Container';
+import HeaderBack from '../Theme/HeaderBack';
 import CardReview from './CardReview';
 
 const Index = ({ dataHapalan, navigation }) => {
@@ -18,14 +20,8 @@ const Index = ({ dataHapalan, navigation }) => {
   } = navigation;
 
   return (
-    <ScrollView>
-      <TouchableOpacity
-        onPress={() => navigation.pop()}
-        style={{ marginTop: 30, marginBottom: 30 }}
-      >
-        <Text>Kembali</Text>
-      </TouchableOpacity>
-      <Text>Review hapalan screen</Text>
+    <Container>
+      <HeaderBack navigation={navigation} text="Review Hapalan" />
 
       <CardReview
         surah={editSurah}
@@ -33,7 +29,7 @@ const Index = ({ dataHapalan, navigation }) => {
         editDisplayHapalanAyats={editDisplayHapalanAyats}
         updateBelajarHapalan={updateBelajarHapalan}
       />
-    </ScrollView>
+    </Container>
   );
 };
 

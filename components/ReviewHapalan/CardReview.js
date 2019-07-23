@@ -11,6 +11,8 @@ import {
 } from 'antd-mobile-rn';
 import moment from 'moment';
 
+import { Container } from '../Theme/Container';
+import HeaderBack from '../Theme/HeaderBack';
 import { isScheduleNow, schduleToDate } from '../../unstated/utils';
 import FrontCard from './FrontCard';
 import BackCard from './BackCard';
@@ -61,7 +63,7 @@ class CardEdit extends Component {
         })
         .map(item => Number(item.number));
 
-      this.getDisplayHapalanAyat(displayHapalanAyats);
+      this.getDisplayHapalanAyat(displayHapalanAyats, listAyat[0]);
       this.setState({
         listAyat,
         selectAyat: listAyat[0]
@@ -69,9 +71,9 @@ class CardEdit extends Component {
     }
   }
 
-  getDisplayHapalanAyat = displayHapalanAyats => {
+  getDisplayHapalanAyat = (displayHapalanAyats, selectAyat) => {
     const displayHapalanAyat = displayHapalanAyats.find(
-      item => item.number === this.state.selectAyat
+      item => item.number === selectAyat
     );
 
     if (displayHapalanAyat) {
@@ -208,35 +210,60 @@ class CardEdit extends Component {
     const { name_latin } = this.props.surah;
 
     return (
-      <ScrollView
-        automaticallyAdjustContentInsets={false}
-        showsHorizontalScrollIndicator={false}
-        showsVerticalScrollIndicator={false}
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: 'white',
+          margin: 20,
+          borderRadius: 10,
+          padding: 10,
+          justifyContent: 'space-between',
+          marginBottom: 35
+        }}
       >
-        <WingBlank>
-          <Text>{name_latin}</Text>
+        <WingBlank style={{ marginBottom: 40 }}>
+          <Text style={{ fontWeight: 'bold', fontSize: 16 }}>{name_latin}</Text>
         </WingBlank>
-        {!isJawab ? (
-          <FrontCard
-            submit={this.showJawaban}
-            surah={this.props.surah}
-            number={selectAyat}
-            {...dataFrontCard}
-            deskripsiFrontCard={deskripsiFrontCard}
-          />
-        ) : (
-          <BackCard
-            submit={this.showJawaban}
-            surah={this.props.surah}
-            number={selectAyat}
-            {...dataBackCard}
-            deskripsiBackCard={deskripsiBackCard}
-            hard={this.onHard}
-            good={this.onGood}
-            easy={this.onEasy}
-          />
-        )}
-      </ScrollView>
+        <ScrollView
+          automaticallyAdjustContentInsets={false}
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          style={{
+            flex: 1
+          }}
+        >
+          {!isJawab ? (
+            <FrontCard
+              submit={this.showJawaban}
+              surah={this.props.surah}
+              number={selectAyat}
+              {...dataFrontCard}
+              deskripsiFrontCard={deskripsiFrontCard}
+            />
+          ) : (
+            <BackCard
+              submit={this.showJawaban}
+              surah={this.props.surah}
+              number={selectAyat}
+              {...dataBackCard}
+              deskripsiBackCard={deskripsiBackCard}
+              hard={this.onHard}
+              good={this.onGood}
+              easy={this.onEasy}
+            />
+          )}
+        </ScrollView>
+        <View style={{ marginBottom: 10 }}>
+          {!isJawab ? (
+            <Button
+              bl
+              title="Tampilkan Jawaban"
+              onPress={this.showJawaban}
+              color="#5B3E96"
+            />
+          ) : null}
+        </View>
+      </View>
     );
   }
 }

@@ -11,6 +11,7 @@ import {
 } from 'antd-mobile-rn';
 import moment from 'moment';
 
+import { red, green, blue } from '../Theme/Color';
 import { Container } from '../Theme/Container';
 import HeaderBack from '../Theme/HeaderBack';
 import { isScheduleNow, schduleToDate } from '../../unstated/utils';
@@ -261,7 +262,13 @@ class CardEdit extends Component {
               onPress={this.showJawaban}
               color="#5B3E96"
             />
-          ) : null}
+          ) : (
+            <Flex justify="around">
+              <Button title="Hard" onPress={this.onHard} color={red} />
+              <Button title="Good" onPress={this.onGood} color={green} />
+              <Button title="Easy" onPress={this.onEasy} color={blue} />
+            </Flex>
+          )}
         </View>
       </View>
     );

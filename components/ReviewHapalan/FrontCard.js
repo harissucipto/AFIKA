@@ -32,7 +32,7 @@ function FrontCard(props) {
           Petunjuk {numberAyat && `Ayat ke ${number}`}:
         </Text>
       </WingBlank>
-      {true && (
+      {text && (
         <WingBlank>
           <Text
             style={{
@@ -49,7 +49,7 @@ function FrontCard(props) {
           <WhiteSpace />
         </WingBlank>
       )}
-      {true && (
+      {translations && (
         <WingBlank>
           <Text style={{ fontWeight: 'bold', color: primary }}>
             Terjemahan:{' '}
@@ -60,7 +60,7 @@ function FrontCard(props) {
           <WhiteSpace />
         </WingBlank>
       )}
-      {true && (
+      {deskripsi && (
         <WingBlank>
           <Text style={{ fontWeight: 'bold', color: primary }}>Deskripsi:</Text>
           <WhiteSpace />

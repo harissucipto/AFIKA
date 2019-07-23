@@ -1,6 +1,8 @@
 import React from 'react';
 import { View, Text, Button } from 'react-native';
-import { Flex, WingBlank } from 'antd-mobile-rn';
+import { Flex, WingBlank, WhiteSpace } from 'antd-mobile-rn';
+
+import { primary } from '../Theme/Color';
 
 function BackCard(props) {
   const {
@@ -18,33 +20,56 @@ function BackCard(props) {
 
   return (
     <View>
-      <WingBlank>
-        <Text>Jawaban {numberAyat && `Ayat ke ${number}`}:</Text>
+      <WingBlank style={{ marginBottom: 40 }}>
+        <Text
+          style={{
+            textAlign: 'center',
+            borderBottomColor: primary,
+            borderBottomWidth: 1,
+            paddingBottom: 5,
+            fontWeight: 'bold'
+          }}
+        >
+          Jawaban {numberAyat && `Ayat ke ${number}`}:
+        </Text>
       </WingBlank>
       {text && (
         <WingBlank>
-          <Text>{surah.text[number]}</Text>
+          <Text
+            style={{
+              fontSize: 24,
+              fontWeight: 'bold',
+              color: primary,
+
+              lineHeight: 44
+            }}
+          >
+            {surah.text[number]}
+          </Text>
+          <WhiteSpace />
+          <WhiteSpace />
         </WingBlank>
       )}
       {translations && (
         <WingBlank>
-          <Text>Terjemahan: </Text>
+          <Text style={{ fontWeight: 'bold', color: primary }}>
+            Terjemahan:{' '}
+          </Text>
+          <WhiteSpace />
           <Text>{surah.translations.id.text[number]}</Text>
+          <WhiteSpace />
+          <WhiteSpace />
         </WingBlank>
       )}
       {deskripsi && (
         <WingBlank>
-          <Text>Deskripsi:</Text>
+          <Text style={{ fontWeight: 'bold', color: primary }}>Deskripsi:</Text>
+          <WhiteSpace />
           <Text>{deskripsiBackCard}</Text>
+          <WhiteSpace />
+          <WhiteSpace />
         </WingBlank>
       )}
-      <WingBlank style={{ marginTop: 20 }}>
-        <Flex justify="around">
-          <Button title="Hard" onPress={hard} />
-          <Button title="Good" onPress={good} />
-          <Button title="Easy" onPress={easy} />
-        </Flex>
-      </WingBlank>
     </View>
   );
 }

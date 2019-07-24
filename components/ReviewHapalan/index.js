@@ -6,11 +6,12 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { Container } from '../Theme/Container';
 import HeaderBack from '../Theme/HeaderBack';
 import CardReview from './CardReview';
+import Loading from '../Loading';
 
 const Index = ({ dataHapalan, navigation }) => {
   const { state, updateBelajarHapalan, editDisplayHapalanAyats } = dataHapalan;
 
-  const { editSurah, surah } = state;
+  const { editSurah, surah, isLoading } = state;
 
   // params navigasi
   const {
@@ -21,14 +22,18 @@ const Index = ({ dataHapalan, navigation }) => {
 
   return (
     <Container>
-      <HeaderBack navigation={navigation} text="Review Hapalan" />
+      <Loading isLoading={isLoading}>
+        <>
+          <HeaderBack navigation={navigation} text="Review Hapalan" />
 
-      <CardReview
-        surah={editSurah}
-        navigation={navigation}
-        editDisplayHapalanAyats={editDisplayHapalanAyats}
-        updateBelajarHapalan={updateBelajarHapalan}
-      />
+          <CardReview
+            surah={editSurah}
+            navigation={navigation}
+            editDisplayHapalanAyats={editDisplayHapalanAyats}
+            updateBelajarHapalan={updateBelajarHapalan}
+          />
+        </>
+      </Loading>
     </Container>
   );
 };

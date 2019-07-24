@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import supermemo2 from 'supermemo2';
 import { ScrollView, View, Text, Picker, Button } from 'react-native';
 import {
@@ -48,7 +49,33 @@ class CardEdit extends Component {
 
   componentWillReceiveProps(props) {
     const { surah } = props;
-    if (surah) {
+    if (!_.isEmpty(surah)) {
+      const { number_of_ayah, displayHapalanAyats, dataBelajar } = surah;
+
+      const listAyat = dataBelajar
+        .filter(item => {
+          const nextReview = schduleToDate(item.supermemo.schedule);
+          return (
+            isScheduleNow(
+              new moment(),
+              new moment(item.terakhirReview),
+              new moment(nextReview)
+            ) || !item.terakhirReview
+          );
+        })
+        .map(item => Number(item.number));
+
+      this.getDisplayHapalanAyat(displayHapalanAyats, listAyat[0]);
+      this.setState({
+        listAyat,
+        selectAyat: listAyat[0]
+      });
+    }
+  }
+
+  componentDidMount() {
+    const { surah } = this.props;
+    if (!_.isEmpty(surah)) {
       const { number_of_ayah, displayHapalanAyats, dataBelajar } = surah;
 
       const listAyat = dataBelajar

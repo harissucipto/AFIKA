@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import _ from 'lodash';
 import {
   ScrollView,
   View,
@@ -57,7 +58,30 @@ class CardEdit extends Component {
 
   componentWillReceiveProps(props) {
     const { surah } = props;
-    if (surah) {
+    if (!_.isEmpty(surah)) {
+      const { number_of_ayah, displayHapalanAyats } = surah;
+      const displayHapalanAyat = displayHapalanAyats.find(
+        item => item.number === this.state.selectAyat
+      );
+
+      this.setState({
+        listAyat: [...Array(Number(number_of_ayah)).keys()].map(x => ({
+          label: x + 1 + '',
+          value: x + 1
+        }))
+      });
+
+      if (displayHapalanAyat) {
+        this.setState({ ...displayHapalanAyat });
+      } else {
+        this.setState({ ...initDisplayHapalanAyat });
+      }
+    }
+  }
+
+  componentDidMount() {
+    const { surah } = this.props;
+    if (!_.isEmpty(surah)) {
       const { number_of_ayah, displayHapalanAyats } = surah;
       const displayHapalanAyat = displayHapalanAyats.find(
         item => item.number === this.state.selectAyat

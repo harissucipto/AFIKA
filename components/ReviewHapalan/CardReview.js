@@ -281,22 +281,29 @@ class CardEdit extends Component {
             />
           )}
         </ScrollView>
-        <View style={{ marginBottom: 10 }}>
-          {!isJawab ? (
+
+        {!isJawab ? (
+          <View style={{ marginBottom: 10 }}>
             <Button
               bl
               title="Tampilkan Jawaban"
               onPress={this.showJawaban}
               color="#5B3E96"
             />
-          ) : (
-            <Flex justify="around">
+          </View>
+        ) : (
+          <View style={{ flexDirection: 'row' }}>
+            <View style={{ flex: 1, marginRight: 5 }}>
               <Button title="Hard" onPress={this.onHard} color={red} />
+            </View>
+            <View style={{ flex: 1, marginRight: 5 }}>
               <Button title="Good" onPress={this.onGood} color={green} />
+            </View>
+            <View style={{ flex: 1 }}>
               <Button title="Easy" onPress={this.onEasy} color={blue} />
-            </Flex>
-          )}
-        </View>
+            </View>
+          </View>
+        )}
       </View>
     );
   }

@@ -92,6 +92,38 @@ class DataHapalan extends Container {
     }));
   };
 
+  resetHapalanSurah = async (number, number_of_ayah) => {
+    this.setState({ isLoading: true });
+
+    const newHapalanSurahs = this.state.hapalanSurahs.map(item => {
+      return item.number === number
+        ? {
+            ...item,
+            displayHapalanAyats: [],
+            dateInit: new Date(),
+            dataBelajar: [...Array(Number(number_of_ayah)).keys()].map(x => ({
+              number: x + 1,
+              supermemo: supermemo2(),
+              terakhirReview: null
+            }))
+          }
+        : item;
+    });
+
+    await AsyncStorage.setItem(
+      'hapalanSurahs',
+      stringify(newHapalanSurahs)
+    ).catch(err => {
+      console.log(err, 'ini error');
+      this.setState({ isLoading: false, error: err });
+    });
+
+    this.setState(({ hapalanSurahs }) => ({
+      isLoading: false,
+      hapalanSurahs: newHapalanSurahs
+    }));
+  };
+
   setQuery = value => this.setState({ querySurah: value });
   clearQuery = () => this.setState({ querySurah: '' });
 

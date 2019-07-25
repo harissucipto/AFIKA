@@ -26,10 +26,18 @@ class ListSurah extends Component {
     this.setState({
       visible: true,
       nameLatin: surah.name_latin,
+      number_of_ayah: surah.number_of_ayah,
       number: surah.number
     });
   onHapalanDelete = number => () => {
     this.props.deleteHapalanSurah(number);
+    this.setState({
+      visible: false,
+      ...surahSelected
+    });
+  };
+  onHapalanReset = (number, number_of_ayah) => () => {
+    this.props.resetHapalanSurah(number, number_of_ayah);
     this.setState({
       visible: false,
       ...surahSelected
@@ -158,7 +166,10 @@ class ListSurah extends Component {
             <View style={{ marginBottom: 5 }}>
               <Button
                 title="Reset Hapalan"
-                onPress={() => console.log('reset hapalan')}
+                onPress={this.onHapalanReset(
+                  this.state.number,
+                  this.state.number_of_ayah
+                )}
               />
             </View>
             <View>

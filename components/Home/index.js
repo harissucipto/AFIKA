@@ -23,7 +23,8 @@ class Index extends React.Component {
       state,
       addHapalanSurahs,
       deleteHapalanSurah,
-      selectEditSurah
+      selectEditSurah,
+      resetHapalanSurah
     } = dataHapalan;
 
     const { hapalanSurahs, isLoading } = state;
@@ -40,6 +41,7 @@ class Index extends React.Component {
                 hapalanSurahs={hapalanSurahs}
                 deleteHapalanSurah={deleteHapalanSurah}
                 selectEditSurah={selectEditSurah}
+                resetHapalanSurah={resetHapalanSurah}
               />
             </View>
             <View style={{ alignItems: 'flex-end' }}>

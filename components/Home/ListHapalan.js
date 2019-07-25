@@ -7,8 +7,22 @@ import { primary } from '../Theme/Color';
 import { JAC } from '../Theme/Text';
 import { schduleToDate, isScheduleNow } from '../../unstated/utils';
 import JumlahReview from './JumlahReview';
+import { green, blue, red } from '../Theme/Color';
 
 const { Item } = List;
+
+const Circle = (props: any) => {
+  const size = props.size || 20;
+  const style = {
+    borderRadius: size / 2,
+    backgroundColor: props.color || '#527fe4',
+    width: size,
+    height: size,
+    margin: 1,
+    marginRight: 8
+  };
+  return <View style={style} />;
+};
 
 const surahSelected = {
   nameLatin: '',
@@ -152,31 +166,62 @@ class ListSurah extends Component {
           maskClosable
           visible={this.state.visible}
         >
-          <Flex justify="between" style={{ marginBottom: 10 }}>
-            <Text>{this.state.nameLatin}</Text>
-            <Button title="Batal" onPress={this.onClose} />
-          </Flex>
-          <View>
-            <View style={{ marginBottom: 5 }}>
-              <Button
-                title="Edit Hapalan"
-                onPress={this.onHapalanEdit(this.state.number)}
-              />
+          <View style={{ flexDirection: 'row', marginBottom: 20 }}>
+            <View style={{ flexGrow: 4 }}>
+              <Text
+                style={{
+                  fontWeight: 'bold',
+                  fontSize: 16,
+                  marginTop: 10
+                }}
+              >
+                {this.state.nameLatin}
+              </Text>
             </View>
-            <View style={{ marginBottom: 5 }}>
-              <Button
+            <View style={{ flexGrow: 1 }}>
+              <Button title="Batal" onPress={this.onClose} color="red" />
+            </View>
+          </View>
+
+          <View>
+            <View style={{ marginBottom: 10 }}>
+              <TouchableOpacity onPress={this.onHapalanEdit(this.state.number)}>
+                <View style={{ flexDirection: 'row' }}>
+                  <Circle color={green} />
+                  <Text style={{ color: green, fontWeight: 'bold' }}>
+                    Edit Hapalan
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+            <View style={{ marginBottom: 10 }}>
+              <TouchableOpacity
                 title="Reset Hapalan"
                 onPress={this.onHapalanReset(
                   this.state.number,
                   this.state.number_of_ayah
                 )}
-              />
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Circle color={blue} />
+                  <Text style={{ color: blue, fontWeight: 'bold' }}>
+                    Reset Hapalan
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
             <View>
-              <Button
+              <TouchableOpacity
                 title="Delete Hapalan"
                 onPress={this.onHapalanDelete(this.state.number)}
-              />
+              >
+                <View style={{ flexDirection: 'row' }}>
+                  <Circle color={red} />
+                  <Text style={{ color: red, fontWeight: 'bold' }}>
+                    Delete Hapalan
+                  </Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
         </Modal>

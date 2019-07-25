@@ -1,5 +1,12 @@
 import React, { Component } from 'react';
-import { ScrollView, Text, TouchableOpacity, View, Button } from 'react-native';
+import {
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+  Button,
+  Image
+} from 'react-native';
 import { List, WingBlank, Flex, Modal } from 'antd-mobile-rn';
 import moment from 'moment';
 
@@ -8,6 +15,7 @@ import { JAC } from '../Theme/Text';
 import { schduleToDate, isScheduleNow } from '../../unstated/utils';
 import JumlahReview from './JumlahReview';
 import { green, blue, red } from '../Theme/Color';
+import setting from '../../assets/setting.png';
 
 const { Item } = List;
 
@@ -101,62 +109,47 @@ class ListSurah extends Component {
         <List>
           {hapalanSurahs.map(surah => (
             <Item key={surah.number} style={{ backgroundColor: primary }}>
-              <WingBlank
-                style={{
-                  backgroundColor: 'white',
-                  height: 80,
-                  paddingLeft: 11,
-                  paddingRight: 11,
-                  marginLeft: 10,
-                  marginRight: 10,
-                  borderRadius: 8
-                }}
+              <TouchableOpacity
+                onPress={this.onHapalanReview(surah.number, surah.dataBelajar)}
               >
-                <Flex
-                  justify="between"
+                <WingBlank
                   style={{
-                    paddingTop: 10,
-                    paddingBottom: 5,
-                    paddingLeft: 10,
-                    paddingRight: 5
+                    backgroundColor: 'white',
+                    height: 80,
+                    paddingLeft: 11,
+                    paddingRight: 11,
+                    marginLeft: 10,
+                    marginRight: 10,
+                    borderRadius: 8
                   }}
                 >
-                  <TouchableOpacity
-                    onPress={this.onHapalanReview(
-                      surah.number,
-                      surah.dataBelajar
-                    )}
+                  <Flex
+                    justify="between"
+                    style={{
+                      paddingTop: 10,
+                      paddingBottom: 5,
+                      paddingLeft: 10,
+                      paddingRight: 5
+                    }}
                   >
                     <JAC>{surah.name_latin}</JAC>
-                  </TouchableOpacity>
 
-                  <JAC>No. {surah.number}</JAC>
-                </Flex>
-                <Flex justify="between">
-                  <TouchableOpacity
-                    onPress={this.onHapalanReview(
-                      surah.number,
-                      surah.dataBelajar
-                    )}
-                  >
-                    <JumlahReview surah={surah} />
-                  </TouchableOpacity>
-                  <Flex>
-                    <TouchableOpacity onPress={this.onSettingOpen(surah)}>
-                      <Text
-                        style={{
-                          paddingLeft: 20,
-                          fontSize: 20,
-                          color: 'red',
-                          fontWeight: 'bold'
-                        }}
-                      >
-                        :
-                      </Text>
-                    </TouchableOpacity>
+                    <JAC>No. {surah.number}</JAC>
                   </Flex>
-                </Flex>
-              </WingBlank>
+                  <Flex justify="between">
+                    <JumlahReview surah={surah} />
+
+                    <Flex style={{ marginRight: 10, marginTop: 5 }}>
+                      <TouchableOpacity onPress={this.onSettingOpen(surah)}>
+                        <Image
+                          source={setting}
+                          style={{ height: 22, width: 22 }}
+                        />
+                      </TouchableOpacity>
+                    </Flex>
+                  </Flex>
+                </WingBlank>
+              </TouchableOpacity>
             </Item>
           ))}
         </List>

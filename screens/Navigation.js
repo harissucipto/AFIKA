@@ -6,6 +6,7 @@ import AddHapalanScreen from './AddHapalanScreen';
 import EditHapalanScreen from './EditHapalanScreen';
 import ReviewHapalanScreen from './ReviewHapalanScreen';
 import InfoHapalan from './InfoHapalan';
+import PanduanScreen from './PanduanScreen';
 
 const AppNavigator = createStackNavigator(
   {
@@ -38,10 +39,16 @@ const AppNavigator = createStackNavigator(
       navigationOptions: {
         header: null
       }
+    },
+    PanduanScreen: {
+      screen: PanduanScreen,
+      navigationOptions: {
+        header: null
+      }
     }
   },
   {
-    initialRouteName: 'Home'
+    initialRouteName: 'PanduanScreen'
   }
 );
 

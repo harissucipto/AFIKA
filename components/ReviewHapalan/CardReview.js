@@ -128,7 +128,6 @@ class CardEdit extends Component {
     const { listAyat, selectAyat } = this.state;
     const indexListAyat = listAyat.findIndex(number => number === selectAyat);
 
-    console.log(listAyat, 'list ayat');
     // mapping hapalan
     const dataBelajar = this.props.surah.dataBelajar.find(item => {
       return item.number === selectAyat;

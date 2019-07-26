@@ -84,7 +84,6 @@ class ListSurah extends Component {
   };
 
   onHapalanReview = (number, dataBelajar) => () => {
-    console.log(number, 'numbernya');
     const isAdaHapalan = dataBelajar.filter(item => {
       const nextReview = schduleToDate(item.supermemo.schedule);
       return (
@@ -108,11 +107,6 @@ class ListSurah extends Component {
 
   render() {
     const { hapalanSurahs } = this.props;
-    const footerButtons = [
-      { text: 'Cancel', onPress: () => console.log('cancel') },
-      { text: 'Ok', onPress: () => console.log('ok') }
-    ];
-
     return (
       <ScrollView>
         <List>

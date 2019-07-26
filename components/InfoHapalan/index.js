@@ -84,8 +84,6 @@ class Index extends React.Component {
         data: result[key]
       }));
 
-      console.log(newData, 'data Baru');
-
       return newData.map(tanggal => {
         return (
           <View key={tanggal.schedule}>

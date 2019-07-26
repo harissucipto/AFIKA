@@ -5,6 +5,7 @@ import HomeScreen from './HomeScreen';
 import AddHapalanScreen from './AddHapalanScreen';
 import EditHapalanScreen from './EditHapalanScreen';
 import ReviewHapalanScreen from './ReviewHapalanScreen';
+import InfoHapalan from './InfoHapalan';
 
 const AppNavigator = createStackNavigator(
   {
@@ -28,6 +29,12 @@ const AppNavigator = createStackNavigator(
     },
     ReviewHapalanScreen: {
       screen: ReviewHapalanScreen,
+      navigationOptions: {
+        header: null
+      }
+    },
+    InfoHapalan: {
+      screen: InfoHapalan,
       navigationOptions: {
         header: null
       }

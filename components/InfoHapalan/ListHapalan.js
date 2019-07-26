@@ -187,7 +187,7 @@ class ListSurah extends Component {
 
           <View>
             <View style={{ marginBottom: 10 }}>
-              <TouchableOpacity onPress={this.onHapalanInfo(this.state.number)}>
+              <TouchableOpacity onPress={this.onHapalanEdit(this.state.number)}>
                 <View style={{ flexDirection: 'row' }}>
                   <Circle color="#5B3E96" />
                   <Text style={{ color: '#5B3E96', fontWeight: 'bold' }}>

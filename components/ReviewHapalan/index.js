@@ -25,7 +25,6 @@ const Index = ({ dataHapalan, navigation }) => {
       <Loading isLoading={isLoading}>
         <>
           <HeaderBack navigation={navigation} text="Review Hapalan" />
-
           <CardReview
             surah={editSurah}
             navigation={navigation}

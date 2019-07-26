@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { Flex } from 'antd-mobile-rn';
 import moment from 'moment';
 
+import { TRC, TCB, TCG, TCR } from '../Theme/Text';
 import { isScheduleNow, schduleToDate } from '../../unstated/utils';
 
 class JumlahReview extends Component {
@@ -39,10 +40,12 @@ class JumlahReview extends Component {
   render() {
     return (
       <Flex>
-        <Text>Review : </Text>
-        <Text>{this.countBaru()}</Text>
-        <Text>{this.countSekarang()}</Text>
-        <Text>{this.countNanti()}</Text>
+        <TRC>Review</TRC>
+        <View style={{ flexDirection: 'row' }}>
+          <TCR>{this.countBaru()}</TCR>
+          <TCG>{this.countSekarang()}</TCG>
+          <TCB>{this.countNanti()}</TCB>
+        </View>
       </Flex>
     );
   }

@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
 const slides = [
   {
     key: 'pembuka',
-    title: 'Selamat Datang Di AFIKA',
+    title: 'Panduan Penggunaan AFIKA',
     text:
       'AFIKA adalah Aplikasi yang digunakan untuk Menghapal Al-Quran dengan metode spaced - repetetion, atau sebuah metode pengualangan hapalan dengan jeda waktu yang optimal',
     image: require('../assets/gambar3-min.png'),
@@ -59,19 +59,6 @@ const slides = [
 ];
 
 export default class App extends React.Component {
-  state = {
-    isLoading: true,
-    showPanduan: true
-  };
-
-  async componentDidMount() {
-    this.setState({ isLoading: true });
-    const showPanduan = await AsyncStorage.getItem('showPanduan');
-    const value = showPanduan ? (showPanduan !== 'false' ? true : false) : true;
-
-    this.setState({ isLoading: false, showPanduan: value });
-  }
-
   _renderNextButton = () => {
     return (
       <View style={styles.buttonCircle}>
@@ -100,32 +87,10 @@ export default class App extends React.Component {
   _onDone = async () => {
     // User finished the introduction. Show real app through
     // navigation or simply by controlling state
-    this.setState({ isLoading: true });
-    await AsyncStorage.setItem('showPanduan', 'false').catch(err => {
-      console.log(err);
-      this.setState({ isLoading: false });
-    });
-    this.setState({ isLoading: false, showPanduan: false });
+    this.props.navigation.pop();
   };
   render() {
     // params navigasi
-
-    if (this.state.isLoading)
-      return (
-        <View
-          style={{
-            backgroundColor: primary,
-            flex: 1,
-            justifyContent: 'center'
-          }}
-        >
-          <ActivityIndicator size="large" />
-        </View>
-      );
-
-    if (!this.state.showPanduan)
-      return <HomeScreen navigation={this.props.navigation} />;
-
     return (
       <AppIntroSlider
         slides={slides}

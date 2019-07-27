@@ -39,6 +39,12 @@ export default class HeaderHome extends React.Component {
     this.props.navigation.navigate('PanduanLagi');
   };
 
+  _deleteHapalan = async () => {
+    await AsyncStorage.removeItem('hapalanSurahs');
+    this.setState({ visible: false });
+    this.props.navigation.replace('Home');
+  };
+
   render() {
     const { countHapalan } = this.props;
 
@@ -88,7 +94,10 @@ export default class HeaderHome extends React.Component {
                 </TouchableOpacity>
               </View>
               <View>
-                <TouchableOpacity title="Delete Hapalan">
+                <TouchableOpacity
+                  title="Delete Hapalan"
+                  onPress={this._deleteHapalan}
+                >
                   <View style={{ flexDirection: 'row' }}>
                     <Circle color={red} />
                     <Text style={{ color: red, fontWeight: 'bold' }}>

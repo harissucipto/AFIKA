@@ -34,7 +34,7 @@ const slides = [
 
   {
     key: 'somethun-dos',
-    title: 'Membantu mempertahankan Hapalan kamu',
+    title: 'Membantu Mempertahankan Hapalan',
     text:
       'Algoritma Cerdas dapat menghitung jeda waktu optimal untuk mengulang hapalan kamu agar tetap ingat.',
     image: require('../assets/gambar1-min.png'),
@@ -43,7 +43,7 @@ const slides = [
 
   {
     key: 'tambah-hapalan',
-    title: 'Metode pembelajaran FlashCard',
+    title: 'Metode Pembelajaran \nFlashCard',
     text:
       'FlashCard membantu kamu untuk mengubah kontent yang ingin dihapal dengan menyesuaikan petunjuk dan jawaban pada kartu hapalan.',
     image: require('../assets/gambar2-min.png'),

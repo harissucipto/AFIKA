@@ -34,16 +34,16 @@ const slides = [
 
   {
     key: 'somethun-dos',
-    title: 'AFIKA dapat membantu mempertahankan Hapalan kamu',
+    title: 'Membantu mempertahankan hapalan kamu',
     text:
-      'Algoritma supermemo2 dapat menghitung jeda waktu optimal untuk mengulang hapalan kamu agar tetap ingat.',
+      'Algoritma Cerdas dapat menghitung jeda waktu optimal untuk mengulang hapalan kamu agar tetap ingat.',
     image: require('../assets/gambar1-min.png'),
     backgroundColor: primary
   },
 
   {
     key: 'tambah-hapalan',
-    title: 'Menggunakan metode pembelajaran FlashCard',
+    title: 'Metode pembelajaran FlashCard',
     text:
       'FlashCard membantu kamu untuk mengubah kontent yang ingin dihapal dengan menyesuaikan petunjuk dan jawaban pada kartu hapalan.',
     image: require('../assets/gambar2-min.png'),
@@ -51,8 +51,9 @@ const slides = [
   },
   {
     key: 'AFIKA',
-    title: '',
-    text: 'Ayo Mulai Gunakan AFIKA!',
+    title: 'Mulai Gunakan AFIKA',
+    text:
+      'Nabi Muhammad S.A.W bersabda yang artinya “Sesungguhnya perumpaan pemilik Qur’an seperti pemilik unta yang tertambat. Kalau dia menjaganya akan tetap terikat, kalau dibiarkan akan lepas.” (HR. Muttafaq ‘alihi).',
     image: require('../assets/gambar4-min.png'),
     backgroundColor: primary
   }

@@ -34,7 +34,7 @@ export default class HeaderHome extends React.Component {
 
   onClose = () => this.setState({ visible: false });
 
-  _kePanduan = async () => {
+  _kePanduan = () => {
     this.setState({ visible: false });
     this.props.navigation.navigate('PanduanLagi');
   };

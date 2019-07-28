@@ -1,7 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { AppLoading, Font } from 'expo';
+import { AppLoading } from 'expo';
 import { Provider } from 'unstated';
+import * as Font from 'expo-font';
 
 import Navigation from './screens/Navigation';
 

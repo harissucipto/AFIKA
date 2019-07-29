@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "AFIKA",
+    "name": "afika",
     "description": "Aplikasi Penghapal Al-Quran dengan metode spaced repetetion",
-    "slug": "AFIKA",
+    "slug": "afika",
     "privacy": "public",
     "sdkVersion": "31.0.0",
     "platforms": ["ios", "android"],
@@ -19,9 +19,9 @@
     },
     "assetBundlePatterns": ["**/*"],
     "android": {
-      "package": "com.harissucipto.afika",
+      "package": "com.harissucipto.afika-low",
       "permissions": ["WRITE_EXTERNAL_STORAGE", "READ_EXTERNAL_STORAGE"],
-      "versionCode": 2
+      "versionCode": 1
     }
   }
 }
